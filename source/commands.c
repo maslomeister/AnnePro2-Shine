@@ -48,6 +48,11 @@ static inline void executeProfile(bool init) {
   needToCallbackProfile = true;
 }
 
+static inline void setIntensity(uint8_t intensity) {
+  ledIntensity = intensity;
+  executeProfile(false);
+}
+
 static inline void nextIntensity(void) {
   ledIntensity = (ledIntensity + 1) % 8;
   executeProfile(false);
@@ -204,6 +209,10 @@ void commandCallback(const message_t *msg) {
     break;
   case CMD_LED_SET_PROFILE:
     setProfile(msg->payload[0]);
+    sendStatus();
+    break;
+  case CMD_LED_SET_INTENSITY:
+    setIntensity(msg->payload[0]);
     sendStatus();
     break;
   case CMD_LED_NEXT_PROFILE:

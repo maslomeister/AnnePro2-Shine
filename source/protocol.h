@@ -12,7 +12,8 @@
 
 #define PROTOCOL_SD SD1
 
-enum {
+enum
+{
   /*
    * Main -> LED
    */
@@ -26,6 +27,7 @@ enum {
 
   CMD_LED_NEXT_INTENSITY = 0x06,
   CMD_LED_NEXT_ANIMATION_SPEED = 0x07,
+  CMD_LED_SET_INTENSITY = 0x08,
 
   /* Masks */
   /* Override a key color, eg. capslock */
@@ -56,7 +58,8 @@ enum {
 #define MAX_PAYLOAD_SIZE 64
 
 /** Enum of the states used for the serial protocol finite-state automaton */
-enum protoState {
+enum protoState
+{
   /* 2-byte initial start-of-message sync */
   STATE_SYNC_1,
   STATE_SYNC_2,
@@ -71,7 +74,8 @@ enum protoState {
 };
 
 /* Buffer holding a single message */
-typedef struct {
+typedef struct
+{
   uint8_t command;
   uint8_t msgId;
   uint8_t payloadSize;
@@ -79,7 +83,8 @@ typedef struct {
 } message_t;
 
 /* Internal protocol state */
-typedef struct {
+typedef struct
+{
   /* Callback to call upon receiving a valid message */
   void (*callback)(const message_t *);
 
